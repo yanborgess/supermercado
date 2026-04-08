@@ -21,19 +21,31 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UsuarioResponse>> listar(){
+    public ResponseEntity<List<UsuarioResponse>> listar() {
         return ResponseEntity.ok(this.usuarioService.listaUsuarios());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UsuarioResponseRecord> buscar(@PathVariable Long id){
+    public ResponseEntity<UsuarioResponseRecord> buscar(@PathVariable Long id) {
         return ResponseEntity.ok(this.usuarioService.buscarUsuarioPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity<Void> cadastrar(@RequestBody UsuarioRequest usuarioRequest){
-        this.usuarioService.cadastrarusuario(usuarioRequest);
+    public ResponseEntity<Void> cadastrar(@RequestBody UsuarioRequest usuarioRequest) {
+        this.usuarioService.cadastrarUsuario(usuarioRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
 
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody UsuarioRequest usuarioRequest) {
+        this.usuarioService.atualizarUsuario(id, usuarioRequest);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> remover(@PathVariable Long id) {
+        this.usuarioService.removerUsuario(id);
+        return ResponseEntity.noContent().build();
     }
 }

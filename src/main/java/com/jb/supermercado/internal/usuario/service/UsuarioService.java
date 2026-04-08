@@ -20,12 +20,12 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public List<UsuarioResponse> listaUsuarios(){
+    public List<UsuarioResponse> listaUsuarios() {
         List<UsuarioEntity> usuarios = this.usuarioRepository.findAll();
         return UsuarioMapper.entidadeParaResponseList(usuarios);
     }
 
-    public void cadastrarusuario(UsuarioRequest usuarioRequest) {
+    public void cadastrarUsuario(UsuarioRequest usuarioRequest) {
         UsuarioEntity usuarioEntity = UsuarioMapper.requestParaEntidade(usuarioRequest);
         this.usuarioRepository.save(usuarioEntity);
     }
@@ -34,5 +34,18 @@ public class UsuarioService {
         UsuarioEntity usuarioEntity = this.usuarioRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Usuario nao Encontrado"));
         return UsarioMapperRecord.entidadeParaResponse(usuarioEntity);
+    }
+
+    public void atualizarUsuario(Long id, UsuarioRequest usuarioRequest) {
+        UsuarioEntity usuarioEntity = this.usuarioRepository.findById(id).orElseThrow(()
+                -> new RuntimeException("Usuario nao Encontrado"));
+        usuarioEntity.setNome(usuarioRequest.getNome());
+        usuarioEntity.setEmail(usuarioRequest.getEmail());
+        usuarioEntity.setSenha(usuarioRequest.getSenha());
+        this.usuarioRepository.save(usuarioEntity);
+    }
+
+    public void removerUsuario(Long id) {
+        this.usuarioRepository.deleteById(id);
     }
 }

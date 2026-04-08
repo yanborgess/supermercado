@@ -7,7 +7,7 @@ import com.jb.supermercado.internal.usuario.entity.UsuarioEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsarioMapperRecord {
+public class UsuarioMapperRecord {
 
     public static UsuarioEntity requestParaEntidade(UsuarioRequestRecord usuarioRequest) {
         UsuarioEntity usuarioEntity = new UsuarioEntity();
@@ -21,10 +21,11 @@ public class UsarioMapperRecord {
        return new UsuarioResponseRecord(
                usuarioEntity.getId(),
                usuarioEntity.getNome(),
-               usuarioEntity.getSenha());
+               usuarioEntity.getSenha(),
+                usuarioEntity.getStatus());
     }
 
-    public static List<UsuarioResponseRecord> entidadeParaResponseList(List<UsuarioEntity> usuarioEntityList) {
+    public static List<UsuarioResponseRecord> entidadeParaResponseRecordList(List<UsuarioEntity> usuarioEntityList) {
         List<UsuarioResponseRecord> usuarioResponseRecordArrayList = new ArrayList<>();
         for (UsuarioEntity usuarioEntity : usuarioEntityList) {
             usuarioResponseRecordArrayList.add(entidadeParaResponse(usuarioEntity));

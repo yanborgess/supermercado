@@ -1,7 +1,6 @@
 package com.jb.supermercado.internal.usuario.controller;
 
-import com.jb.supermercado.internal.usuario.dto.UsuarioRequest;
-import com.jb.supermercado.internal.usuario.dto.UsuarioResponse;
+import com.jb.supermercado.internal.usuario.dto.UsuarioRequestRecord;
 import com.jb.supermercado.internal.usuario.dto.UsuarioResponseRecord;
 import com.jb.supermercado.internal.usuario.service.UsuarioService;
 import org.springframework.http.HttpStatus;
@@ -21,7 +20,7 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UsuarioResponse>> listar() {
+    public ResponseEntity<List<UsuarioResponseRecord>> listar() {
         return ResponseEntity.ok(this.usuarioService.listaUsuarios());
     }
 
@@ -31,14 +30,14 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> cadastrar(@RequestBody UsuarioRequest usuarioRequest) {
+    public ResponseEntity<Void> cadastrar(@RequestBody UsuarioRequestRecord usuarioRequest) {
         this.usuarioService.cadastrarUsuario(usuarioRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
 
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody UsuarioRequest usuarioRequest) {
+    public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody UsuarioRequestRecord usuarioRequest) {
         this.usuarioService.atualizarUsuario(id, usuarioRequest);
         return ResponseEntity.noContent().build();
     }

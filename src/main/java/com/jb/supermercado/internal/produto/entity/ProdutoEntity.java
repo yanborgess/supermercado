@@ -12,12 +12,12 @@ public class ProdutoEntity {
     private Long id;
     private String nome;
     private String descicao;
-    private Long preco ;
-    private int  quantidadeEstoque;
+    private double preco ;
+    private Integer  quantidadeEstoque;
     private String status;
 
 
-    public ProdutoEntity(Long id, String nome, String email, String senha, String status) {
+    public ProdutoEntity(Long id, String nome, String descicao, double preco, Integer quantidadeEstoque, String status) {
         this.id = id;
         this.nome = nome;
         this.descicao = descicao;
@@ -55,11 +55,11 @@ public class ProdutoEntity {
         this.descicao = descicao;
     }
 
-    public Long getPreco() {
+    public double getPreco() {
         return preco;
     }
 
-    public void setPreco(Long preco) {
+    public void setPreco(double preco) {
         this.preco = preco;
     }
 

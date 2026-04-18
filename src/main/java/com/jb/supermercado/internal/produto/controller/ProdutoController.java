@@ -32,9 +32,21 @@ public class ProdutoController {
         return ResponseEntity.ok(this.produtosService.buscarProdutoPorId(id));
     }
 
-    @GetMapping
-    public ResponseEntity<ProdutoResponseRecord> cadastrar(@Valid @ RequestBody ProdutoRequestRecord produtoRequest) {
+    @PostMapping
+    public ResponseEntity<ProdutoResponseRecord> cadastrar(@Valid @RequestBody ProdutoRequestRecord produtoRequest) {
         this.produtosService.cadastrarProdutos(produtoRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody ProdutoRequestRecord produtoRequest) {
+        this.produtosService.atualizarProduto(id, produtoRequest);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> remover(@PathVariable Long id) {
+        this.produtosService.removerProduto(id);
+        return ResponseEntity.noContent().build();
     }
 }
